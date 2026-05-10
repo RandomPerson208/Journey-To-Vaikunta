@@ -1,0 +1,6 @@
+{
+  "appId": "com.codex.journeytovaikunta",
+  "appName": "Journey to Vaikunta",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}

@@ -1,0 +1,95 @@
+Mala Counter App - Chat History and Project Notes
+Generated in Codex from the active project thread.
+
+Project folder:
+/Users/riteshruparel/Documents/Codex/2026-04-30-code-me-a-mala-counter-app
+
+Purpose:
+This file records the user requests and implementation history for the Mala Counter app so the chat context is packaged with the code.
+
+User request history:
+1. "code me a mala counter app with button photo of shri shri radha nila madahva ipa"
+2. "i sasid passage to .ipa"
+3. "give me download to the files"
+4. "organize it for github capacitoer"
+5. "i need a main.yml .do i?"
+6. "add everything and give me a zip"
+7. "after yml rin compleate where ipa"
+8. "GitHub Actions workflow for iOS build/export next. do this now"
+9. "i dont need sign"
+10. "skipped second step no artifacts"
+11. "skipped again"
+12. "mac says it is a .app should be .ipa"
+13. "use capacitir i will be useing troll store"
+14. "issue:zooms in when clicked too fast. also add thing to yml where it sets the icon to a photo named icon.png in resources folder i will add to git"
+15. "and make me a zip"
+16. "where is yml"
+17. "well that is not in zip"
+18. "add a loading screen that lasts 4sec."
+19. "ADD A BUTTON THE PHOTO is suppost to be a visual in a frame button should be a japa beads"
+20. "ALSO only 3 sec loading screen"
+21. "that does not look like a japa"
+22. "the number should update when clicked on the japa. also make it send notofications ifi havent done a mala by 12:00 in afternoon that says: (It's Time to Chant!)"
+23. "also bead number and rounds should be reseted everyday"
+24. "the number inside japa button should go from 108 to 0 not increase"
+25. "delete any extra files in the mala riteshruparel/codex/mala counter and make the code as small as you can without changing app"
+26. "zip"
+27. "ass steps button at top ledt also add pranam mantras in steps and create it so the bead wount progrss without you press in Pranam Mantras every mala.Also add a in app popup if chanting starts beforehand which will not work. also add the pranam mantra much smaller than normal and disapeers after done and shows up for next mala"
+28. "and add offline malas to add malas done of a real japa"
+29. "no mantras are three pranams nama om vishnu padaya,namaste sarasvati deve. jaya shri krishna chaitanya. steps should show how to chant mala and there should be a button next to main button not click steps to compleate them"
+30. "the button dispears after done and mala cannot star until done. also i put it short so less prompt typing compleat them for me"
+31. "you forgot expanded in the app and yiu for button it should disaperar compleatlybut it says steps when done. also when done the bik bead button should shift back into it soriginal spot in middle."
+32. "no the mantras should only show up in steps button should say Pranams Done"
+33. "nicely done but the bead button should show a next bead animation"
+34. "and i litrally have to scroll down to see buttons"
+35. "nope just put it back before you tightened it just rearrange it and beads should move not just pulse"
+36. "keep the glow no movement needed and you moved the pic to the bottem put it where it was before"
+37. "steps should be a whole diffrent page with back"
+38. "add pranams buttton above main"
+39. "the message (Compleate Pranams First dispears when screen changes"
+40. "copy every aspect of his chat into txt and code and package it into zip"
+
+Current implemented app behavior:
+- Static web app organized as a Capacitor project for GitHub and iOS/TrollStore-style IPA workflows.
+- Main web files are in www/index.html, www/styles.css, and www/script.js.
+- GitHub Actions workflow lives at .github/workflows/main.yml.
+- The devotional image is shown in a framed photo area from www/assets/radha-nila-madhava-button.png.
+- Loading screen lasts 3 seconds.
+- Main japa counter is a CSS mala/bead button.
+- The number inside the bead button counts down from 108 to 0.
+- Current bead, rounds, and remaining values update on each valid japa tap.
+- State is saved locally in localStorage.
+- Bead count and rounds reset each day.
+- Pranams are required before each mala starts.
+- The Pranams Done button is above the main japa bead button.
+- If chanting is attempted before pranams are done, the app shows "Complete Pranam Mantras first." and opens Steps.
+- That warning is layered above the full-screen Steps page so it remains visible during the screen change.
+- Steps is now a full-screen page with a Back button.
+- Steps includes the expanded pranam mantras and how-to-chant instructions.
+- Offline malas can be added for malas completed on a real japa.
+- Noon reminder notification is scheduled with the title "It's Time to Chant!" if a mala has not been completed by 12:00 PM.
+- Next bead glow is kept; the moving bead marker was removed by request.
+- The photo is back in its original position above the japa button.
+
+Important build/package notes:
+- This is a Capacitor project.
+- The workflow can rebuild generated files in GitHub Actions.
+- node_modules is intentionally not included to keep the project small.
+- Run npm ci before Capacitor sync/build in a fresh environment.
+- The user said they do not need signing and plans to use TrollStore.
+- The app icon workflow expects a resources/icon.png file when the user adds it to Git.
+
+Main files included in the code package:
+-.github/workflows/main.yml
+-.gitignore
+- README.md
+- capacitor.config.json
+- package.json
+- package-lock.json
+- ios/
+- www/index.html
+- www/styles.css
+- www/script.js
+- www/assets/radha-nila-madhava-button.png
+- CHAT_HISTORY.txt
+

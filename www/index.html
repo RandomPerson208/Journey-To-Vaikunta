@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Journey to Vaikunta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="nav.css">
+</head>
+<body class="home-active is-loading">
+  <div class="loading-screen" id="loadingScreen" role="status" aria-live="polite">
+    <div class="loading-mark">
+      <img src="assets/radha-nila-madhava-button.png" alt="" class="loading-photo" aria-hidden="true">
+    </div>
+    <p class="loading-title">Journey to Vaikunta</p>
+    <div class="loading-bar" aria-hidden="true"><span></span></div>
+  </div>
+
+  <button class="steps-button" id="stepsButton" type="button">Steps</button>
+
+  <aside class="steps-panel" id="stepsPanel" aria-hidden="true">
+    <button class="steps-close" id="stepsCloseButton" type="button" aria-label="Close">x</button>
+    <p class="steps-title">How to chant mala</p>
+    <ol class="chant-steps">
+      <li>Say the three pranam mantras.</li>
+      <li>Press Pranams Done beside the beads.</li>
+      <li>Chant one maha-mantra per bead.</li>
+      <li>Complete 108 beads for one mala.</li>
+    </ol>
+    <div class="offline-malas">
+      <p>Offline malas</p>
+      <div>
+        <button id="offlineMinusButton" type="button">-</button>
+        <strong id="offlineMalaCount">1</strong>
+        <button id="offlinePlusButton" type="button">+</button>
+      </div>
+      <button id="offlineAddButton" type="button">Add malas done</button>
+    </div>
+  </aside>
+
+  <div class="chant-popup" id="chantPopup" role="alert">Complete Pranam Mantras first.</div>
+
+  <main class="home-shell app-page is-active" id="homePage">
+    <section class="home-card">
+      <p class="home-kicker">Journey to Vaikunta</p>
+      <h1>Dashboard</h1>
+      <div class="dashboard-grid">
+        <section class="dashboard-panel">
+          <p class="dashboard-label">Chanting pledges</p>
+          <div class="pledge-controls" aria-label="Chanting pledge in malas">
+            <button id="pledgeMinusButton" type="button">-</button>
+            <strong id="pledgeGoalCount">1</strong>
+            <button id="pledgePlusButton" type="button">+</button>
+          </div>
+          <p class="dashboard-note" id="pledgeStatus">Set your personal malas goal for today.</p>
+        </section>
+        <section class="dashboard-panel">
+          <p class="dashboard-label">Monthly progress</p>
+          <div class="monthly-total"><strong id="monthlyMalaCount">0</strong><span id="monthlyPledgeCount">/ 0 pledged</span></div>
+          <div class="monthly-progress" aria-hidden="true"><span id="monthlyProgressBar"></span></div>
+          <p class="dashboard-note" id="monthlyProgressText">Your monthly chanting progress will show here.</p>
+        </section>
+        <section class="dashboard-panel">
+          <p class="dashboard-label">Sloka pledge</p>
+          <div class="pledge-controls" aria-label="Daily sloka pledge">
+            <button id="slokaMinusButton" type="button">-</button>
+            <strong id="slokaGoalCount">1</strong>
+            <button id="slokaPlusButton" type="button">+</button>
+          </div>
+          <div class="duration-controls" aria-label="Sloka pledge duration">
+            <span>Duration</span>
+            <button id="slokaDurationMinusButton" type="button">-</button>
+            <strong id="slokaDurationCount">1 month</strong>
+            <button id="slokaDurationPlusButton" type="button">+</button>
+          </div>
+          <p class="dashboard-note" id="slokaPledgeStatus">Read slokas daily for your pledge.</p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <main class="app-shell app-page" id="counterPage">
+    <section class="counter-card">
+      <p class="eyebrow">Hare Krishna Japa</p>
+      <h1>Mala Counter</h1>
+      <p class="subtitle">Tap the japa beads for each mantra. Your progress is saved on this device.</p>
+      <div class="status-row" aria-label="Counter summary">
+        <div class="stat">
+          <span class="stat-label">Current bead</span>
+          <strong class="stat-value" id="beadCount">0</strong>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Rounds</span>
+          <strong class="stat-value" id="roundCount">0</strong>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Remaining</span>
+          <strong class="stat-value" id="remainingCount">108</strong>
+        </div>
+      </div>
+
+      <figure class="devotional-frame">
+        <img src="assets/radha-nila-madhava-button.png" alt="Devotional image inspired by Shri Shri Radha Nila Madhava" class="devotional-photo">
+      </figure>
+
+      <div class="chant-row">
+        <button class="pranam-side-button" id="pranamButton" type="button">
+          <span class="pranam-label">Pranams Done</span>
+        </button>
+        <button class="counter-button" id="counterButton" type="button" aria-describedby="tapHint">
+          <span class="japa-beads" aria-hidden="true">
+            <svg viewBox="0 0 220 220" class="progress-svg">
+              <circle class="progress-track" cx="110" cy="110" r="100"></circle>
+              <circle class="progress-fill" id="progressCircle" cx="110" cy="110" r="100"></circle>
+            </svg>
+            <span class="mala-thread"></span>
+            <span class="bead bead-1"></span>
+            <span class="bead bead-2"></span>
+            <span class="bead bead-3"></span>
+            <span class="bead bead-4"></span>
+            <span class="bead bead-5"></span>
+            <span class="bead bead-6"></span>
+            <span class="bead bead-7"></span>
+            <span class="bead bead-8"></span>
+            <span class="bead bead-9"></span>
+            <span class="bead bead-10"></span>
+            <span class="bead bead-11"></span>
+            <span class="bead bead-12"></span>
+            <span class="bead bead-13"></span>
+            <span class="bead bead-14"></span>
+            <span class="bead bead-15"></span>
+            <span class="bead bead-16"></span>
+            <span class="bead bead-17"></span>
+            <span class="bead bead-18"></span>
+            <span class="bead bead-19"></span>
+            <span class="bead bead-20"></span>
+            <span class="guru-bead"></span>
+            <span class="tassel"><span></span><span></span><span></span></span>
+            <span class="bead-center" id="beadButtonCount">108</span>
+          </span>
+          <span class="tap-copy">
+            <strong>Tap Beads</strong>
+            <span id="tapHint">Each 108 taps completes one round.</span>
+          </span>
+        </button>
+      </div>
+
+      <div class="action-row">
+        <button class="secondary-button" id="undoButton" type="button">Undo</button>
+        <button class="secondary-button secondary-button-reset" id="resetButton" type="button">Reset</button>
+      </div>
+    </section>
+  </main>
+
+  <main class="books-shell app-page" id="booksPage">
+    <section class="books-card">
+      <p class="home-kicker">Scripture study</p>
+      <h1>Books &amp; Slokas</h1>
+      <label class="book-search-label" for="bookSearchInput">Search this page</label>
+      <input id="bookSearchInput" class="book-search-input" type="search" placeholder="Search sloka 2, chapter, canto...">
+      <div class="books-breadcrumb" id="booksBreadcrumb"></div>
+      <div class="books-content" id="booksContent"></div>
+    </section>
+  </main>
+
+  <main class="info-shell app-page" id="helpPage">
+    <section class="info-card">
+      <button class="book-back-button" type="button" data-info-back>Back</button>
+      <p class="home-kicker">Help</p>
+      <h1>Help</h1>
+      <div class="sloka-block">
+        <h3>Dashboard</h3>
+        <p>Set your chanting pledge, sloka pledge, and sloka pledge duration. Sloka pledges are counted only for today, so you cannot finish future days in advance.</p>
+      </div>
+      <div class="sloka-block">
+        <h3>Mala Counter</h3>
+        <p>Press Pranams Done before each mala, then tap the japa beads. The bead count goes from 108 to 0 and resets each day.</p>
+      </div>
+      <div class="sloka-block">
+        <h3>Books</h3>
+        <p>Open Books, choose a book, chapter, and sloka. Use search to search the current page or current section, then press Done at the bottom of a sloka for today's sloka pledge.</p>
+      </div>
+    </section>
+  </main>
+
+  <main class="info-shell app-page" id="aboutPage">
+    <section class="info-card">
+      <button class="book-back-button" type="button" data-info-back>Back</button>
+      <p class="home-kicker">About</p>
+      <h1>About</h1>
+      <div class="sloka-block">
+        <h3>Journey to Vaikunta</h3>
+        <p>A simple devotional companion for daily japa, chanting pledges, scripture study, sloka pledges, and monthly progress.</p>
+      </div>
+      <div class="sloka-block">
+        <h3>Privacy</h3>
+        <p>Your counter, pledges, and reading progress are saved on this device in local app storage.</p>
+      </div>
+      <div class="sloka-block">
+        <h3>Book Text</h3>
+        <p>The Books section includes Bhagavad-gita slokas and translations, Srimad-Bhagavatam slokas/translations, and Sri Caitanya-caritamrta original text. BBT English translations, synonyms, and purports are not bundled unless separately licensed.</p>
+      </div>
+    </section>
+  </main>
+
+  <main class="info-shell app-page" id="creditsPage">
+    <section class="info-card">
+      <button class="book-back-button" type="button" data-info-back>Back</button>
+      <p class="home-kicker">Credits</p>
+      <h1>Credits</h1>
+      <div class="sloka-block">
+        <h3>Book Sources</h3>
+        <p>Book navigation and source links point to Bhaktivedanta VedaBase pages for Bhagavad-gita As It Is, Sri Caitanya-caritamrta, and Srimad-Bhagavatam. Bhagavad-gita sloka text, transliteration, and English translation are from the gita/gita JSON dataset released under the Unlicense.</p>
+      </div>
+      <div class="sloka-block">
+        <h3>Srimad-Bhagavatam</h3>
+        <p>English verse translations are bundled from Anand Aadhar's Srimad Bhagavatam: The Story of the Fortunate One, available at bhagavata.org / srimadbhagavatam.org under Creative Commons Attribution NonCommercial ShareAlike 3.0. Sanskrit sloka text/transliteration uses JDhruv14/Srimad_Bhagavatam and snskrt/Shrimad_Bhagvat_Puran Hugging Face datasets under Apache-2.0, plus bhagavata.org Sanskrit line text as fallback. This means attribution is required, commercial use is not allowed for the CC BY-NC-SA translation, and adaptations must use the same or a similar license.</p>
+      </div>
+      <div class="sloka-block">
+        <h3>Sri Caitanya-caritamrta</h3>
+        <p>The app includes Sri Caitanya-caritamrta original Bengali/Sanskrit text for the verse pages. The original work by Krsnadasa Kaviraja Gosvami is public domain; VedaBase pages are used for navigation/reference. English BBT translations, synonyms, and purports are not bundled. The public-domain-in-the-USA selections from Chaitanya's Life And Teachings by Sir Jadunath Sarkar via Project Gutenberg ebook 38016 are included separately.</p>
+      </div>
+      <div class="sloka-block">
+        <h3>Copyright</h3>
+        <p>VedaBase credits state that content is used with permission of The Bhaktivedanta Book Trust International, Inc. All rights reserved, and Bhaktivedanta Archives Inc., owner of VedaBase. This app uses VedaBase for navigation/source references only unless licensed text is added.</p>
+      </div>
+      <div class="sloka-block">
+        <h3>Permission Notice</h3>
+        <p>If licensed BBT text is added, credit it as: Text from the work courtesy of The Bhaktivedanta Book Trust International, Inc. (www.krishna.com). Used with permission.</p>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <button class="bottom-nav-button is-active" type="button" data-page="home">Dashboard</button>
+    <button class="bottom-nav-button" type="button" data-page="counter">Mala Counter</button>
+    <button class="bottom-nav-button" type="button" data-page="books">Books &amp; Slokas</button>
+    <button class="bottom-nav-button" id="moreButton" type="button" aria-expanded="false" aria-controls="morePanel">...</button>
+  </nav>
+
+  <section class="more-panel" id="morePanel" aria-hidden="true">
+    <div class="more-actions">
+      <button class="more-menu-item" id="helpButton" type="button">Help</button>
+      <button class="more-menu-item" id="aboutButton" type="button">About</button>
+      <button class="more-menu-item" id="creditsButton" type="button">Credits</button>
+      <button class="more-menu-item" id="notificationToggleButton" type="button">Disable Notifications</button>
+    </div>
+    <div class="more-panel-text" id="morePanelText">Use Dashboard for pledges and progress. Use Mala Counter to chant.</div>
+  </section>
+
+  <script src="books-data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
