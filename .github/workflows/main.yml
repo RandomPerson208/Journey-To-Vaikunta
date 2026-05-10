@@ -1,0 +1,82 @@
+name: iOS CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: macos-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify JavaScript syntax
+        run: node --check www/script.js
+
+      - name: Sync Capacitor iOS project
+        run: npm run sync:ios
+
+  build-ipa:
+    runs-on: macos-latest
+    needs: validate
+
+    env:
+      APP_NAME: App
+      PROJECT_PATH: ios/App/App.xcodeproj
+      SCHEME: App
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync Capacitor iOS project
+        run: npm run sync:ios
+
+      - name: Build unsigned device app
+        run: |
+          xcodebuild \
+            -project "$PROJECT_PATH" \
+            -scheme "$SCHEME" \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination "generic/platform=iOS" \
+            -derivedDataPath "$RUNNER_TEMP/DerivedData" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            build
+
+      - name: Package TrollStore IPA
+        run: |
+          mkdir -p "$RUNNER_TEMP/Payload"
+          cp -R "$RUNNER_TEMP/DerivedData/Build/Products/Release-iphoneos/${APP_NAME}.app" "$RUNNER_TEMP/Payload/${APP_NAME}.app"
+          cd "$RUNNER_TEMP"
+          zip -r "mala-counter-trollstore.ipa" Payload
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mala-counter-trollstore-ipa
+          path: ${{ runner.temp }}/mala-counter-trollstore.ipa
+          if-no-files-found: error
