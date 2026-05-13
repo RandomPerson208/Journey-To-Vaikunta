@@ -1,7 +1,7 @@
 {
-  "name": "journey-to-vaikunta",
+  "name": "journey-to-vaikuntha",
   "version": "1.0.0",
-  "description": "A devotional Journey to Vaikunta app with a mala counter, packaged for iPhone with Capacitor.",
+  "description": "A devotional Journey To Vaikuntha app with a mala counter, packaged for iPhone with Capacitor.",
   "private": true,
   "scripts": {
     "copy:ios": "npx cap copy ios",
@@ -12,16 +12,16 @@
     "capacitor",
     "ios",
     "mala-counter",
-    "journey-to-vaikunta",
+    "journey-to-vaikuntha",
     "japa",
     "radha-krishna"
   ],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@capacitor/cli": "^8.3.1",
-    "@capacitor/core": "^8.3.1",
-    "@capacitor/ios": "^8.3.1",
-    "@capacitor/local-notifications": "^8.0.2"
+    "@capacitor/cli": "8.3.1",
+    "@capacitor/core": "8.3.1",
+    "@capacitor/ios": "8.3.1",
+    "@capacitor/local-notifications": "8.0.2"
   }
 }

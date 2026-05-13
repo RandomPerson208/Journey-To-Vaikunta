@@ -17,13 +17,31 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install --no-package-lock --no-audit --no-fund
 
-      - name: Verify JavaScript syntax
-        run: node --check www/script.js
+      - name: Generate iOS icon assets
+        run: |
+          if [ -f resources/icon.png ]; then
+            npx @capacitor/assets generate --ios --assetPath resources
+          else
+            echo "resources/icon.png not found, skipping icon generation"
+          fi
+
+      - name: Verify inline JavaScript syntax
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const childProcess = require('child_process');
+          const html = fs.readFileSync('www/index.html', 'utf8');
+          const scripts = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map((match) => match[1]);
+          if (!scripts.length) {
+            throw new Error('No inline JavaScript found in www/index.html');
+          }
+          fs.writeFileSync(`${process.env.RUNNER_TEMP || '/tmp'}/journey-inline-check.js`, scripts.join('\n;\n'));
+          childProcess.execFileSync(process.execPath, ['--check', `${process.env.RUNNER_TEMP || '/tmp'}/journey-inline-check.js`], { stdio: 'inherit' });
+          NODE
 
       - name: Sync Capacitor iOS project
         run: npm run sync:ios
@@ -45,10 +63,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install --no-package-lock --no-audit --no-fund
+
+      - name: Generate iOS icon assets
+        run: |
+          if [ -f resources/icon.png ]; then
+            npx @capacitor/assets generate --ios --assetPath resources
+          else
+            echo "resources/icon.png not found, skipping icon generation"
+          fi
 
       - name: Sync Capacitor iOS project
         run: npm run sync:ios
@@ -72,11 +97,11 @@ jobs:
           mkdir -p "$RUNNER_TEMP/Payload"
           cp -R "$RUNNER_TEMP/DerivedData/Build/Products/Release-iphoneos/${APP_NAME}.app" "$RUNNER_TEMP/Payload/${APP_NAME}.app"
           cd "$RUNNER_TEMP"
-          zip -r "mala-counter-trollstore.ipa" Payload
+          zip -r "journey-to-vaikuntha-trollstore.ipa" Payload
 
       - name: Upload IPA artifact
         uses: actions/upload-artifact@v4
         with:
-          name: mala-counter-trollstore-ipa
-          path: ${{ runner.temp }}/mala-counter-trollstore.ipa
+          name: journey-to-vaikuntha-trollstore-ipa
+          path: ${{ runner.temp }}/journey-to-vaikuntha-trollstore.ipa
           if-no-files-found: error

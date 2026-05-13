@@ -1,0 +1,17 @@
+node_modules
+dist
+build
+.DS_Store
+npm-debug.log*
+coverage
+
+# Capacitor / Xcode generated files
+ios/App/App/public
+ios/App/App/capacitor.config.json
+ios/App/App/config.xml
+ios/App/build
+ios/App/output
+ios/App/Pods
+ios/DerivedData
+ios/xcuserdata
+ios/capacitor-cordova-ios-plugins

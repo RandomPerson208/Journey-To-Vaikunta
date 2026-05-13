@@ -1,12 +1,14 @@
-# Journey to Vaikunta
+# Journey To Vaikuntha
 
-A devotional Journey to Vaikunta app with a home page and Radha Nila Madhava-inspired mala counter, packaged for iPhone using Capacitor.
+A devotional Journey To Vaikuntha app with a home page and Radha Nila Madhava-inspired mala counter, packaged for iPhone using Capacitor.
 
 ## Repo structure
 
-- `www/` is the source of truth for the web app used by Capacitor.
+- `www/index.html` is the source of truth for the web app used by Capacitor. CSS, book data, app JavaScript, and the devotional image are inlined there to keep the web app as one file.
 - `ios/` contains the generated native iPhone project.
 - `capacitor.config.json` contains the Capacitor app configuration.
+- `package.json` is the only npm dependency file; there is no `package-lock.json` to keep uploads smaller.
+- Generated iOS sync output is not stored here; GitHub Actions recreates it before building the IPA.
 
 ## Getting started
 
@@ -46,18 +48,19 @@ You need full Xcode plus Apple code signing set up on the Mac you are building f
 
 ## Notes
 
-- Edit app files inside `www/`.
+- Edit the main app in `www/index.html`.
 - After web changes, run `npm run sync:ios` again before building in Xcode.
 - This repo is organized for GitHub so generated dependency folders like `node_modules/` stay out of version control.
+- GitHub Actions installs dependencies from `package.json` without creating a package lock.
 - GitHub Actions is configured in `.github/workflows/main.yml`.
 - Push and pull request runs validate the web app and sync the Capacitor iOS project.
-- Push, pull request, and manual runs also build an unsigned device `.ipa` artifact named `journey-to-vaikunta-trollstore-ipa`.
+- Push, pull request, and manual runs also build an unsigned device `.ipa` artifact named `journey-to-vaikuntha-trollstore-ipa`.
 
 ## GitHub Actions TrollStore build
 
 No Apple signing secrets are required for the current workflow.
 
-Open GitHub Actions and run the `iOS CI` workflow, or push a commit. When it completes, download the `journey-to-vaikunta-trollstore-ipa` artifact from the run summary.
+Open GitHub Actions and run the `iOS CI` workflow, or push a commit. When it completes, download the `journey-to-vaikuntha-trollstore-ipa` artifact from the run summary.
 
 ## Important limitation
 
